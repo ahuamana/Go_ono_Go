@@ -1,8 +1,10 @@
-package com.paparazziteam.go_ono_go;
+package com.paparazziteam.go_ono_go.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.paparazziteam.go_ono_go.R;
 
 public class MainActivity extends AppCompatActivity {
 

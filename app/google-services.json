@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "683901199077",
+    "project_id": "go-ono-go",
+    "storage_bucket": "go-ono-go.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:683901199077:android:ba6265139ff9bd70c66a0c",
+        "android_client_info": {
+          "package_name": "com.paparazziteam.go_ono_go"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "683901199077-hvodigfv18bo9v2h0tlivvtamu03550s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCn2zNW9gXl0t0DsQei8y49zRjEOTvT5E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "683901199077-hvodigfv18bo9v2h0tlivvtamu03550s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

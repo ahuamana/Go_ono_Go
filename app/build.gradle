@@ -39,4 +39,11 @@ dependencies {
 
     //A fast circular ImageView perfect for profile images.
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    // Declare the dependency for the Firebase Authentication library
+    // When NOT using the BoM, you must specify versions in Firebase library dependencies
+    implementation 'com.google.firebase:firebase-auth:21.0.1'
+
+    // Also declare the dependency for the Google Play services library and specify its version
+    implementation 'com.google.android.gms:play-services-auth:19.0.0'
 }
