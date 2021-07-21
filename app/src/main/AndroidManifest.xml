@@ -12,7 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Go_ono_Go">
         <activity android:name=".Activities.RegisterActivity"></activity>
-        <activity android:name=".Activities.LoginActivity">
+        <activity
+            android:name=".Activities.LoginActivity"
+            android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
