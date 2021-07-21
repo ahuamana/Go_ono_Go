@@ -8,10 +8,12 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.paparazziteam.go_ono_go.R;
+import com.paparazziteam.go_ono_go.models.User;
 
 import java.util.Calendar;
 
@@ -20,7 +22,11 @@ public class RegisterActivity extends AppCompatActivity {
     ImageView imageViewBack;
     ImageView imgCalendar;
 
-    EditText edtDateTime;
+    EditText edtEmail, edtPassword, edtFullname, edtDateTime;
+
+    Button btnRegistrar;
+
+    User mUser;
 
 
     @Override
@@ -30,7 +36,17 @@ public class RegisterActivity extends AppCompatActivity {
 
         imageViewBack = findViewById(R.id.btnBack_Register);
         imgCalendar = findViewById(R.id.imgCalendar_Register);
+
         edtDateTime = findViewById(R.id.edtDateTime_Register);
+        edtEmail = findViewById(R.id.edtEmail_Register);
+        edtFullname = findViewById(R.id.edtFullName_Register);
+        edtPassword = findViewById(R.id.edtPassword_Register);
+
+        btnRegistrar = findViewById(R.id.btnRegistrar_Register);
+
+        mUser = new User();
+
+
 
 
 
@@ -66,6 +82,40 @@ public class RegisterActivity extends AppCompatActivity {
 
 
 
+        btnRegistrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String email = edtEmail.getText().toString();
+                String pass = edtEmail.getText().toString();
+                String fullname = edtEmail.getText().toString();
+                String date = edtEmail.getText().toString();
+
+                if(email.equals("") || email == null)
+                {
+                    edtEmail.setError("Error");
+                }
+
+                if(pass.equals("") || pass == null)
+                {
+                    edtPassword.setError("Error");
+                }
+
+                if(fullname.equals("") || fullname == null)
+                {
+                    edtFullname.setError("Error");
+                }
+
+                if(date.equals("") || date == null)
+                {
+                    edtDateTime.setError("Error");
+                }
+
+
+            }
+
+        });
+
 
     }
 
@@ -85,6 +135,12 @@ public class RegisterActivity extends AppCompatActivity {
 
             String date = dayOfMonth+"/"+month+"/"+year;
             edtDateTime.setText(date);
+
+            if(edtDateTime.getText().toString() != null || !edtDateTime.getText().toString() .equals("") )
+            {
+                edtDateTime.setError(null);
+            }
+
         }, years, months, day);
         datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         datePickerDialog.show();
