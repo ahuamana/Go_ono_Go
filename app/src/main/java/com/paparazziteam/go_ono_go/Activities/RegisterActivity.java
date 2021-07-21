@@ -57,6 +57,16 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+        edtDateTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dateTimePicker();
+            }
+        });
+
+
+
+
     }
 
     private void dateTimePicker() {
