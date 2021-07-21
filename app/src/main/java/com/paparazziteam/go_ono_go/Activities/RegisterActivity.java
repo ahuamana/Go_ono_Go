@@ -18,12 +18,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
+import com.paparazziteam.go_ono_go.Providers.AuthProvider;
 import com.paparazziteam.go_ono_go.Providers.UserProvider;
 import com.paparazziteam.go_ono_go.R;
 import com.paparazziteam.go_ono_go.models.User;
 
 import java.util.Calendar;
-import java.util.Date;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -35,7 +35,7 @@ public class RegisterActivity extends AppCompatActivity {
     Button btnRegistrar;
 
     User mUser;
-    UserProvider mAuth;
+    AuthProvider mAuthProvider;
 
 
 
@@ -55,7 +55,7 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegistrar = findViewById(R.id.btnRegistrar_Register);
 
         mUser = new User();
-        mAuth = new UserProvider();
+        mAuthProvider = new AuthProvider();
 
 
 
@@ -110,9 +110,9 @@ public class RegisterActivity extends AppCompatActivity {
     private void registerUser() {
 
         String email = edtEmail.getText().toString();
-        String pass = edtEmail.getText().toString();
-        String fullname = edtEmail.getText().toString();
-        String date = edtEmail.getText().toString();
+        String pass = edtPassword.getText().toString();
+        String fullname = edtFullname.getText().toString();
+        String date = edtDateTime.getText().toString();
 
         if(email.equals("") || email == null)
         {
@@ -153,13 +153,26 @@ public class RegisterActivity extends AppCompatActivity {
                         Log.e("","Empieza el registro");
 
                         //Register
-                        mAuth.registerWithEmail(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        mAuthProvider.registerWithEmail(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
 
                                 if(task.isSuccessful())
                                 {
                                     Toast.makeText(RegisterActivity.this, "Registro Exitoso!", Toast.LENGTH_SHORT).show();
+
+                                    UserProvider mUserProvider = new UserProvider();
+                                    mUserProvider.create(mUser).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+
+                                            if(task.isSuccessful())
+                                            {
+                                                Toast.makeText(RegisterActivity.this, "Guardado en la base de datos!", Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                    });
+
                                 }
 
                             }
@@ -170,6 +183,8 @@ public class RegisterActivity extends AppCompatActivity {
                                 Toast.makeText(RegisterActivity.this, "Error! " + e.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         });
+
+
 
 
                     }

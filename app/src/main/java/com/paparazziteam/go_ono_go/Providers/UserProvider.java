@@ -1,28 +1,21 @@
 package com.paparazziteam.go_ono_go.Providers;
 
-import android.content.Context;
-
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.paparazziteam.go_ono_go.models.User;
 
 public class UserProvider {
 
-    private FirebaseAuth mAuth;
+    private CollectionReference mCollection;
 
-    public UserProvider() {
-        mAuth = FirebaseAuth.getInstance();
+    public UserProvider()
+    {
+        mCollection = FirebaseFirestore.getInstance().collection("Users");
     }
 
-    public Task<AuthResult> registerWithEmail(String email, String pass)
+    public Task<Void> create(User user)
     {
-        return mAuth.createUserWithEmailAndPassword(email,pass);
-    }
-
-    public Task<AuthResult> authenticateWithEmail(String email, String pass)
-    {
-        return mAuth.signInWithEmailAndPassword(email, pass);
+        return mCollection.document(user.getEmail()).set(user);
     }
 }

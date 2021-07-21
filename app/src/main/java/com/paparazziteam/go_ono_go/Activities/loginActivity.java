@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -14,9 +13,8 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
-import com.paparazziteam.go_ono_go.Providers.UserProvider;
+import com.paparazziteam.go_ono_go.Providers.AuthProvider;
 import com.paparazziteam.go_ono_go.R;
 
 public class LoginActivity extends AppCompatActivity {
@@ -24,7 +22,7 @@ public class LoginActivity extends AppCompatActivity {
     TextView txtEmail, txtPassword;
     Button btnAcceder, btnRegistrar;;
 
-    UserProvider mUserProvider;
+    AuthProvider mAuthProvider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
         btnRegistrar = findViewById(R.id.btnRegistrarse);
 
 
-        mUserProvider = new UserProvider();
+        mAuthProvider = new AuthProvider();
 
 
 
@@ -91,7 +89,7 @@ public class LoginActivity extends AppCompatActivity {
                     if(!pass.equals(""))
                     {
                         //login
-                        mUserProvider.authenticateWithEmail(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        mAuthProvider.authenticateWithEmail(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
 
