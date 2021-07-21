@@ -1,18 +1,17 @@
 package com.paparazziteam.go_ono_go.models;
 
-import java.util.Date;
 
 public class User {
 
     private String nombre;
-    private Date fecha;
+    private String fecha;
     private String email;
     private String password;
 
     public User() {
     }
 
-    public User(String nombre, Date fecha, String email, String password) {
+    public User(String nombre, String fecha, String email, String password) {
         this.nombre = nombre;
         this.fecha = fecha;
         this.email = email;
@@ -27,11 +26,11 @@ public class User {
         this.nombre = nombre;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 

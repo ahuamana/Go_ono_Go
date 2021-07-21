@@ -149,7 +149,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edtEmail_Register"
                             android:layout_width="0dp"
-                            android:inputType="textWebPassword"
+                            android:inputType="textEmailAddress"
                             android:layout_marginLeft="10dp"
                             android:hint="Correo Institucional"
                             android:textSize="12dp"

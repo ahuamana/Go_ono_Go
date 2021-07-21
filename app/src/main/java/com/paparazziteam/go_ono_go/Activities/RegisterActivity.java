@@ -1,5 +1,6 @@
 package com.paparazziteam.go_ono_go.Activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
@@ -11,11 +12,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.paparazziteam.go_ono_go.Providers.UserProvider;
 import com.paparazziteam.go_ono_go.R;
 import com.paparazziteam.go_ono_go.models.User;
 
 import java.util.Calendar;
+import java.util.Date;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -27,6 +35,8 @@ public class RegisterActivity extends AppCompatActivity {
     Button btnRegistrar;
 
     User mUser;
+    UserProvider mAuth;
+
 
 
     @Override
@@ -45,6 +55,7 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegistrar = findViewById(R.id.btnRegistrar_Register);
 
         mUser = new User();
+        mAuth = new UserProvider();
 
 
 
@@ -86,30 +97,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String email = edtEmail.getText().toString();
-                String pass = edtEmail.getText().toString();
-                String fullname = edtEmail.getText().toString();
-                String date = edtEmail.getText().toString();
-
-                if(email.equals("") || email == null)
-                {
-                    edtEmail.setError("Error");
-                }
-
-                if(pass.equals("") || pass == null)
-                {
-                    edtPassword.setError("Error");
-                }
-
-                if(fullname.equals("") || fullname == null)
-                {
-                    edtFullname.setError("Error");
-                }
-
-                if(date.equals("") || date == null)
-                {
-                    edtDateTime.setError("Error");
-                }
+                registerUser();
 
 
             }
@@ -117,6 +105,77 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    private void registerUser() {
+
+        String email = edtEmail.getText().toString();
+        String pass = edtEmail.getText().toString();
+        String fullname = edtEmail.getText().toString();
+        String date = edtEmail.getText().toString();
+
+        if(email.equals("") || email == null)
+        {
+            edtEmail.setError("Error");
+        }
+
+        if(pass.equals("") || pass == null)
+        {
+            edtPassword.setError("Error");
+        }
+
+        if(fullname.equals("") || fullname == null)
+        {
+            edtFullname.setError("Error");
+        }
+
+        if(date.equals("") || date == null)
+        {
+            edtDateTime.setError("Error");
+        }
+
+        //Save data
+        if(!email.equals("") && email != null)
+        {
+
+            if(!pass.equals("") && pass != null)
+            {
+
+                if(!fullname.equals("") && fullname != null)
+                {
+                    if(!date.equals("") && date != null)
+                    {
+                        mUser.setNombre(fullname);
+                        mUser.setEmail(email);
+                        mUser.setFecha(date);
+                        mUser.setPassword(pass);
+
+                        Log.e("","Empieza el registro");
+
+                        //Register
+                        mAuth.registerWithEmail(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+
+                                if(task.isSuccessful())
+                                {
+                                    Toast.makeText(RegisterActivity.this, "Registro Exitoso!", Toast.LENGTH_SHORT).show();
+                                }
+
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+
+                                Toast.makeText(RegisterActivity.this, "Error! " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+
+                    }
+                }
+            }
+        }
     }
 
     private void dateTimePicker() {
@@ -136,6 +195,7 @@ public class RegisterActivity extends AppCompatActivity {
             String date = dayOfMonth+"/"+month+"/"+year;
             edtDateTime.setText(date);
 
+            //Remove error if edtDateTime have text inside their field
             if(edtDateTime.getText().toString() != null || !edtDateTime.getText().toString() .equals("") )
             {
                 edtDateTime.setError(null);
