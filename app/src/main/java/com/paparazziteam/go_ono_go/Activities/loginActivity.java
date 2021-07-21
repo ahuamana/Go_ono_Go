@@ -22,7 +22,7 @@ import com.paparazziteam.go_ono_go.R;
 public class LoginActivity extends AppCompatActivity {
 
     TextView txtEmail, txtPassword;
-    Button btnAcceder, btnRegistrar;
+    Button btnAcceder, btnRegistrar;;
 
     UserProvider mUserProvider;
 
